@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- This file is part of sale_shipment_dua. The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/field[@name='carrier_cost_method']" position="after">
+        <newline/>
+        <label name="dua"/>
+        <field name="dua"/>
+        <label name="dua_product"/>
+        <field name="dua_product"/>
+        <label name="dua_price"/>
+        <field name="dua_price"/>
+    </xpath>
+</data>
