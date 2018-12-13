@@ -9,6 +9,7 @@ Imports::
     >>> from decimal import Decimal
     >>> from operator import attrgetter
     >>> from proteus import config, Model, Wizard
+    >>> from trytond.tests.tools import activate_modules
     >>> from trytond.modules.company.tests.tools import create_company, \
     ...     get_company
     >>> from trytond.modules.account.tests.tools import create_fiscalyear, \
@@ -17,27 +18,14 @@ Imports::
     ...     set_fiscalyear_invoice_sequences, create_payment_term
     >>> today = datetime.date.today()
 
-Create database::
+Install sale_shipment_dua::
 
-    >>> config = config.set_trytond()
-    >>> config.pool.test = True
-
-Install module::
-
-    >>> Module = Model.get('ir.module')
-    >>> module, = Module.find([('name', '=', 'sale_shipment_dua')])
-    >>> module.click('install')
-    >>> Wizard('ir.module.install_upgrade').execute('upgrade')
+    >>> config = activate_modules('sale_shipment_dua')
 
 Create company::
 
     >>> _ = create_company()
     >>> company = get_company()
-
-Reload the context::
-
-    >>> User = Model.get('res.user')
-    >>> Group = Model.get('res.group')
 
 Create fiscal year::
 
@@ -51,16 +39,6 @@ Create chart of accounts::
     >>> accounts = get_accounts(company)
     >>> revenue = accounts['revenue']
     >>> expense = accounts['expense']
-
-Create sale user::
-
-    >>> sale_user = User()
-    >>> sale_user.name = 'Sale'
-    >>> sale_user.login = 'sale'
-    >>> sale_user.main_company = company
-    >>> sale_group, = Group.find([('name', '=', 'Sales')])
-    >>> sale_user.groups.append(sale_group)
-    >>> sale_user.save()
 
 Create customer::
 
@@ -178,7 +156,6 @@ Create payment term::
 
 Sale products with cost on shipment::
 
-    >>> config.user = sale_user.id
     >>> Sale = Model.get('sale.sale')
     >>> sale = Sale()
     >>> sale.party = customer
