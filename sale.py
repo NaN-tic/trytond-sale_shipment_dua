@@ -28,10 +28,11 @@ class Sale:
             Line.delete(to_remove)
 
     def set_shipment_cost(self):
-        super(Sale, self).set_shipment_cost()
+        removed = super(Sale, self).set_shipment_cost()
 
         if self.carrier and self.carrier.dua:
             self.set_dua_cost()
+        return removed
 
     def set_dua_cost(self):
         cost = self.carrier.dua_price or self.carrier.dua_product.list_price
