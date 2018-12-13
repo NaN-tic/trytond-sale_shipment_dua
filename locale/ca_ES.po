@@ -1,0 +1,19 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:carrier,dua:"
+msgid "DUA"
+msgstr "DUA"
+
+msgctxt "field:carrier,dua_price:"
+msgid "DUA Price"
+msgstr "Preu DUA"
+
+msgctxt "field:carrier,dua_product:"
+msgid "DUA Product"
+msgstr "Producte DUA"
+
+msgctxt "field:sale.line,dua_cost:"
+msgid "Dua Cost"
+msgstr "Cost DUA"
