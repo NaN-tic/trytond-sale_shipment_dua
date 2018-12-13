@@ -40,17 +40,29 @@ Create chart of accounts::
     >>> revenue = accounts['revenue']
     >>> expense = accounts['expense']
 
+Create tax::
+
+    >>> tax = create_tax(Decimal('.10'))
+    >>> tax.save()
+
 Create customer::
 
     >>> Party = Model.get('party.party')
     >>> customer = Party(name='Customer')
     >>> customer.save()
 
-Create category::
+Create account categories::
 
     >>> ProductCategory = Model.get('product.category')
-    >>> category = ProductCategory(name='Category')
-    >>> category.save()
+    >>> account_category = ProductCategory(name="Account Category")
+    >>> account_category.accounting = True
+    >>> account_category.account_expense = expense
+    >>> account_category.account_revenue = revenue
+    >>> account_category.save()
+
+    >>> account_category_tax, = account_category.duplicate()
+    >>> account_category_tax.customer_taxes.append(tax)
+    >>> account_category_tax.save()
 
 Create product::
 
@@ -65,10 +77,7 @@ Create product::
     >>> template.purchasable = True
     >>> template.salable = True
     >>> template.list_price = Decimal('20')
-    >>> template.cost_price = Decimal('8')
-    >>> template.cost_price_method = 'fixed'
-    >>> template.account_expense = expense
-    >>> template.account_revenue = revenue
+    >>> template.account_category = account_category_tax
     >>> template.save()
     >>> product, = template.products
 
@@ -76,14 +85,12 @@ Create carrier product::
 
     >>> carrier_template = ProductTemplate()
     >>> carrier_template.name = 'carrier product'
-    >>> carrier_template.category = category
     >>> carrier_template.default_uom = unit
     >>> carrier_template.type = 'service'
     >>> carrier_template.salable = True
     >>> carrier_template.delivery_time = 0
     >>> carrier_template.list_price = Decimal('3')
-    >>> carrier_template.cost_price = Decimal(0)
-    >>> carrier_template.account_revenue = revenue
+    >>> carrier_template.account_category = account_category_tax
     >>> carrier_template.save()
     >>> carrier_product, = carrier_template.products
     >>> carrier_product.save()
@@ -92,14 +99,12 @@ Create carrier DUA product::
 
     >>> carrier_dua_template = ProductTemplate()
     >>> carrier_dua_template.name = 'DUA carrier product'
-    >>> carrier_dua_template.category = category
     >>> carrier_dua_template.default_uom = unit
     >>> carrier_dua_template.type = 'service'
     >>> carrier_dua_template.salable = True
     >>> carrier_dua_template.delivery_time = 0
     >>> carrier_dua_template.list_price = Decimal('3')
-    >>> carrier_dua_template.cost_price = Decimal(0)
-    >>> carrier_dua_template.account_revenue = revenue
+    >>> carrier_dua_template.account_category = account_category_tax
     >>> carrier_dua_template.save()
     >>> carrier_dua_product, = carrier_dua_template.products
     >>> carrier_dua_product.save()

@@ -9,8 +9,7 @@ from trytond.modules.product import price_digits
 __all__ = ['Carrier']
 
 
-class Carrier:
-    __metaclass__ = PoolMeta
+class Carrier(metaclass=PoolMeta):
     __name__ = 'carrier'
     dua = fields.Boolean('DUA')
     dua_product = fields.Many2One('product.product', 'DUA Product',

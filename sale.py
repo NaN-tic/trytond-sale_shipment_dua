@@ -8,8 +8,7 @@ from trytond.pyson import Eval
 __all__ = ['Sale', 'SaleLine']
 
 
-class Sale:
-    __metaclass__ = PoolMeta
+class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
 
     @classmethod
@@ -72,8 +71,7 @@ class Sale:
         return cost_line
 
 
-class SaleLine:
-    __metaclass__ = PoolMeta
+class SaleLine(metaclass=PoolMeta):
     __name__ = 'sale.line'
     dua_cost = fields.Numeric('Dua Cost',
         digits=(16, Eval('_parent_sale', {}).get('currency_digits', 2)))
