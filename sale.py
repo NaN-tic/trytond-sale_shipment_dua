@@ -56,7 +56,6 @@ class Sale(metaclass=PoolMeta):
             last_line = self.lines[-1]
             if last_line.sequence is not None:
                 sequence = last_line.sequence + 1
-
         cost_line = SaleLine(
             sale=self,
             sequence=sequence,
@@ -65,6 +64,7 @@ class Sale(metaclass=PoolMeta):
             quantity=1,
             unit=self.carrier.dua_product.sale_uom,
             dua_cost=cost,
+            shipment_cost=None
             )
         cost_line.on_change_product()
         cost_line.unit_price = cost_line.amount = cost_line.gross_unit_price = cost
