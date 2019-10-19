@@ -74,7 +74,6 @@ Create product::
     >>> template.name = 'product'
     >>> template.default_uom = unit
     >>> template.type = 'goods'
-    >>> template.purchasable = True
     >>> template.salable = True
     >>> template.list_price = Decimal('20')
     >>> template.account_category = account_category_tax
@@ -88,7 +87,6 @@ Create carrier product::
     >>> carrier_template.default_uom = unit
     >>> carrier_template.type = 'service'
     >>> carrier_template.salable = True
-    >>> carrier_template.delivery_time = 0
     >>> carrier_template.list_price = Decimal('3')
     >>> carrier_template.account_category = account_category_tax
     >>> carrier_template.save()
@@ -102,7 +100,6 @@ Create carrier DUA product::
     >>> carrier_dua_template.default_uom = unit
     >>> carrier_dua_template.type = 'service'
     >>> carrier_dua_template.salable = True
-    >>> carrier_dua_template.delivery_time = 0
     >>> carrier_dua_template.list_price = Decimal('3')
     >>> carrier_dua_template.account_category = account_category_tax
     >>> carrier_dua_template.save()
