@@ -11,21 +11,6 @@ __all__ = ['Sale', 'SaleLine']
 class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
 
-    @classmethod
-    def draft(cls, sales):
-        Line = Pool().get('sale.line')
-
-        super(Sale, cls).draft(sales)
-
-        # remove dua lines
-        to_remove = []
-        for sale in sales:
-            for line in sale.lines:
-                if line.dua_cost:
-                    to_remove.append(line)
-        if to_remove:
-            Line.delete(to_remove)
-
     def set_shipment_cost(self):
         removed = super(Sale, self).set_shipment_cost()
 
