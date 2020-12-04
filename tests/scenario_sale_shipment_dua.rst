@@ -212,7 +212,8 @@ Sale products with dua cost and dua price on carrier::
     Decimal('30.00')
 
 Duplicate sale::
-    >>> sale_copy = sale.duplicate()
-    >>> sale_copy[0].click('quote')
-    >>> sale_copy[0].total_amount == sale.total_amount
+
+    >>> sale_copy, = sale.duplicate()
+    >>> sale_copy.click('quote')
+    >>> sale_copy.total_amount == sale.total_amount
     True
