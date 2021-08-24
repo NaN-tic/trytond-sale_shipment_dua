@@ -4,6 +4,7 @@
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
+from trytond.modules.currency.fields import Monetary
 
 __all__ = ['Sale', 'SaleLine']
 
@@ -58,5 +59,4 @@ class Sale(metaclass=PoolMeta):
 
 class SaleLine(metaclass=PoolMeta):
     __name__ = 'sale.line'
-    dua_cost = fields.Numeric('Dua Cost',
-        digits=(16, Eval('_parent_sale', {}).get('currency_digits', 2)))
+    dua_cost = Monetary('Dua Cost', digits='currency', currency='currency')
