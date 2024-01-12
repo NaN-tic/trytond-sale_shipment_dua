@@ -19,10 +19,8 @@ class Carrier(metaclass=PoolMeta):
         ], states={
             'invisible': ~Eval('dua', False),
             'required': Eval('dua', False),
-            },
-        depends=['dua'])
+            })
     dua_price = fields.Numeric('DUA Price', digits=price_digits,
         states={
             'invisible': ~Eval('dua', False),
-            },
-        depends=['dua'])
+            })
