@@ -49,7 +49,9 @@ class Sale(metaclass=PoolMeta):
             shipment_cost=None
             )
         cost_line.on_change_product()
-        cost_line.unit_price = cost_line.amount = cost_line.gross_unit_price = cost
+        cost_line.unit_price = cost_line.amount = cost
+        if hasattr(SaleLine, 'base_price'):
+            cost_line.base_price = cost
         return cost_line
 
 
