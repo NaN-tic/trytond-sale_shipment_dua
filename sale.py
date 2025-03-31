@@ -33,6 +33,9 @@ class Sale(metaclass=PoolMeta):
     def get_dua_cost_line(self, cost):
         SaleLine = Pool().get('sale.line')
 
+        if cost is not None:
+            cost = self.currency.round(cost)
+
         sequence = None
         if self.lines:
             last_line = self.lines[-1]
