@@ -16,7 +16,7 @@ class Sale(metaclass=PoolMeta):
         return removed
 
     def set_dua_cost(self):
-        cost = self.carrier.dua_price or self.carrier.dua_product.list_price
+        cost = self.carrier.dua_price or self.carrier.dua_product.list_price_used
         cost_line = self.get_dua_cost_line(cost)
         lines = list(self.lines or [])
         for line in lines:
